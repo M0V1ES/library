@@ -1,4 +1,3 @@
-from books.schemas import CreateBook
 from users.schemas import CreateUser
 
 
