@@ -33,7 +33,7 @@ async def update_author(
     return author
 
 
-async def delete_book(
+async def delete_author(
     session: AsyncSession,
     author: Author,
 ) -> None:

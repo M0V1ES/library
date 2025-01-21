@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from authors import crud
 from authors.schemas import Author, AuthorCreate
+from authors.dependencies import author_by_id
 from core.models import db_helper
 
 router = APIRouter(tags=["authors"])
@@ -14,7 +15,7 @@ async def create_author(
     author_in: AuthorCreate,
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    return await crud.create_author(session=session, book_create=author_in)
+    return await crud.create_author(session=session, author_create=author_in)
 
 
 @router.get("/", response_model=list[Author])
@@ -36,3 +37,11 @@ async def get_author(
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"Author {author_id} not found!",
     )
+
+
+@router.delete("/{product_id}/", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_author(
+    author: Author = Depends(author_by_id),
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+) -> None:
+    await crud.delete_author(session=session, author=author)
