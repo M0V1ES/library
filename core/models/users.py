@@ -13,4 +13,5 @@ class User(Base):
     name: Mapped[str] = mapped_column(String, nullable=False)
     bio: Mapped[str] = mapped_column(Text, nullable=True)
     birth: Mapped[date] = mapped_column(Date, nullable=False)
+    password: Mapped[str] = mapped_column(String, nullable=False)
     issuances: Mapped[list["Issuance"]] = relationship(back_populates="user")
