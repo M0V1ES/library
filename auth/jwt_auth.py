@@ -3,9 +3,7 @@ from fastapi import Depends, Form, APIRouter, HTTPException, status
 from pydantic import BaseModel
 from users.schemas import UserSchema
 from auth import utils as auth_utils
-from fastapi.security import (
-    OAuth2PasswordBearer
-)
+from fastapi.security import OAuth2PasswordBearer
 
 # http_bearer = HTTPBearer()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/jwt/login")
